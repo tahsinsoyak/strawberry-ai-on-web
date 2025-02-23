@@ -1,0 +1,39 @@
+sudo vim /etc/systemd/system/strawberry.service
+
+[Unit]
+Description=Gunicorn instance to serve Flask app
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/root/strawberryaiweb
+Environment="PATH=/root/strawberryaiweb/venv/bin"
+ExecStart=/root/strawberryaiweb/venv/bin/gunicorn --workers 3 --bind unix:/root/strawberryaiweb/strawberry.sock -m 007 wsgi:app
+
+[Install]
+WantedBy=multi-user.target
+
+
+
+
+root@object-detection:~/strawberryaiweb# sudo vim /etc/systemd/system/strawberry.service
+root@object-detection:~/strawberryaiweb# sudo vim /etc/systemd/system/strawberry.service
+root@object-detection:~/strawberryaiweb# root@object-detection:~/strawberryaiweb# sudo systemctl start strawberry
+root@object-detection:~/strawberryaiweb# sudo systemctl enable strawberry
+Created symlink /etc/systemd/system/multi-user.target.wants/strawberry.service → /etc/systemd/system/strawberry.service.
+root@object-detection:~/strawberryaiweb# sudo systemctl status strawberry
+● strawberry.service - Gunicorn instance to serve Flask app
+     Loaded: loaded (/etc/systemd/system/strawberry.service; enabled; preset: enabled)
+     Active: active (running) since Tue 2024-09-03 10:54:00 UTC; 27s ago
+   Main PID: 2451 (gunicorn)
+      Tasks: 1 (limit: 1112)
+     Memory: 17.2M (peak: 17.4M)
+        CPU: 162ms
+     CGroup: /system.slice/strawberry.service
+             └─2451 /root/strawberryaiweb/venv/bin/python3 /root/strawberryaiweb/venv/bin/gunicorn --workers 3 --bind u>
+
+Sep 03 10:54:00 object-detection systemd[1]: Started strawberry.service - Gunicorn instance to serve Flask app.
+Sep 03 10:54:00 object-detection gunicorn[2451]: [2024-09-03 10:54:00 +0000] [2451] [INFO] Starting gunicorn 23.0.0
+Sep 03 10:54:12 object-detection gunicorn[2451]: [2024-09-03 10:54:12 +0000] [2451] [ERROR] connection to ('unix.strawb>
+Sep 03 10:54:26 object-detection gunicorn[2451]: [2024-09-03 10:54:26 +0000] [2451] [ERROR] connection to ('unix.strawb>

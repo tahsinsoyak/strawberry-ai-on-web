@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonuç - Çilek Olgunluk Tespiti</title>
+    {% include 'partials/header.html' %}
+    <style>
+        .card-title {
+            font-size: 1.25rem;
+        }
+
+        .card img {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .card img:hover {
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .card-title {
+                font-size: 1rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 1rem;
+            }
+
+            .btn-primary {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    {% include 'partials/navbar.html' %}
+
+    <div class="container mt-5">
+        <h1 class="text-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Tespit için kullanılan model: {{ model }} - Çilek sayıları">Çilek Tespiti Sonuçları</h1>
+        <p class="text-center">Model: {{ model }}</p>
+        <p class="text-center">Dosya Adı: {{ filename }}</p>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <img src="{{ image_path }}" class="card-img-top img-fluid" alt="Orijinal Görüntü" data-bs-toggle="tooltip" data-bs-placement="top" title="Bu görüntü, analiz için kullanılan orijinal görüntüyü göstermektedir." onclick="openModal(this)">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Orijinal Görüntü</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <img src="{{ bounding_boxes_img_path }}" class="card-img-top img-fluid" alt="Sınır Kutuları Görüntüsü" data-bs-toggle="tooltip" data-bs-placement="top" title="Bu görüntü, tespit edilen çileklerin etrafındaki sınır kutularını göstermektedir." onclick="openModal(this)">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Sınır Kutuları</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card shadow-sm">
+                    <img src="{{ middle_points_img_path }}" class="card-img-top img-fluid" alt="Orta Noktalar Görüntüsü" data-bs-toggle="tooltip" data-bs-placement="top" title="Bu görüntü, tespit edilen çileklerin orta noktalarını göstermektedir." onclick="openModal(this)">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Orta Noktalar</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-4">
+            <h3>Çilek Sayıları</h3>
+            <p>Yarı Olgun Çilekler: {{ halfripe_strawberries_count }}</p>
+            <p>Olgun Çilekler: {{ ripe_strawberries_count }}</p>
+            <p>Olgunlaşmamış Çilekler: {{ unripe_strawberries_count }}</p>
+        </div>
+        <div class="text-center mt-4">
+            <a href="/" class="btn btn-primary"><i class="fas fa-arrow-left"></i> Geri</a>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="imageModalLabel">Görüntü Önizlemesi</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+          </div>
+          <div class="modal-body">
+            <img src="" id="modalImage" class="img-fluid" alt="Önizleme Görüntüsü">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js" integrity="sha512-TPh2Oxlg1zp+kz3nFA0C5vVC6leG/6mm1z9+mA81MI5eaUVqasPLO8Cuk4gMF4gUfP5etR73rgU/8PNMsSesoQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+
+        function openModal(image) {
+            var modalImage = document.getElementById('modalImage');
+            modalImage.src = image.src;
+            var myModal = new bootstrap.Modal(document.getElementById('imageModal'));
+            myModal.show();
+        }
+    </script>
+</body>
+
+{% include 'partials/footer.html' %}
+</html>

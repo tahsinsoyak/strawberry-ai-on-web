@@ -1,0 +1,25 @@
+<!-- templates/navbar.html -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="{{ url_for('static', filename='images/favicon.ico') }}" alt="Çilek Olgunluk Tespiti Logosu" height="55">
+        </a>
+        <a class="navbar-brand" href="/">Çilek Olgunluk Tespiti</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Gezinmeyi aç">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Ana Sayfa</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">Hakkında</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/results">Önceki Sonuçlar</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

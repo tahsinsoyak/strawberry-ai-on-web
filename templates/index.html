@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="tr">
+<title>Çilek Olgunluk Tespiti</title>
+<head>
+    {% include 'partials/header.html' %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-hLK3mVvZUt0c1PpRs+p2Zk0J8WEC2G+dLCbJKfI2cKtSgqURpK4STAA1z5FYZ99vGo+2Tu2g4RCMlX1FL5PpxA==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <style>
+        .carousel-item img {
+            object-fit: cover;
+            width: 100%;
+            height: auto;
+            max-height: 400px;
+        }
+
+        .carousel-caption {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .card {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .form-group input[type="file"] {
+            margin: 0 auto;
+        }
+        
+        .btn-block {
+            width: 100%;
+        }
+
+        .form-group select {
+            margin: 1rem 0;
+        }
+
+        .modal-content {
+            border-radius: 10px;
+        }
+
+        #loadingSpinner {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .carousel-control-prev-icon,
+        .carousel-control-next-icon {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+        }
+
+        @media (max-width: 576px) {
+            .carousel-item img {
+                max-height: 250px;
+            }
+            
+            .card-body {
+                padding: 1rem;
+            }
+        }
+
+    </style>
+</head>
+
+<body>
+    {% include 'partials/navbar.html' %}
+    
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-xl-6 col-lg-8 col-md-10 col-sm-12 mb-4">
+                <div class="card shadow-lg">
+                    <div class="card-body">
+                        <!-- Carousel -->
+                        <div class="mt-4">
+                            <h2 class="text-center mb-4">Örnek Resimlerle Test Et</h2>
+                            <div id="carouselExampleControls" class="carousel slide">
+                                 <div class="carousel-inner">
+                                    {% for image in test_images %}
+                                    <div class="carousel-item {% if loop.first %}active{% endif %}">
+                                        <img src="{{ url_for('static', filename='testdata/' + image) }}" class="d-block w-100 img-fluid" alt="{{ image }}" data-bs-toggle="modal" data-bs-target="#modelSelectModal" data-image="{{ image }}">
+                                        <div class="carousel-caption d-none d-md-block">
+                                            <h5>{{ image }}</h5>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Önceki</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="visually-hidden">Sonraki</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Yükleme Formu -->
+                        <h1 class="card-title text-center mt-4 mb-4"><i class="fas fa-upload"></i> Çilek Resmi Yükleyin</h1>
+                        <form action="/" method="post" enctype="multipart/form-data" class="text-center" id="uploadForm">
+                            <div class="form-group">
+                                <input type="file" name="file" class="form-control" required>
+                            </div>
+                            <div class="form-group mt-3">
+                                <select name="model" class="form-select" required>
+                                    <option value="" disabled selected>Bir model seçin</option>
+                                    <option value="n-bestmodel">N En İyi Model</option>
+                                    <option value="s-bestmodel">S En İyi Model</option>
+                                    <option value="m-bestmodel">M En İyi Model</option>
+                                    <option value="l-bestmodel">L En İyi Model</option>
+                                    <option value="x-bestmodel">X Large En İyi Model</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block mt-4"><i class="fas fa-file-import"></i> Çilek Olgunluğunu Tespit Edin</button>
+                        </form>
+                        
+
+                        <!-- Yükleniyor Spinner -->
+                        <div id="loadingSpinner" style="display:none;">
+                            <div class="spinner-border text-primary mb-3" role="status">
+                                <span class="visually-hidden">Yükleniyor...</span>
+                            </div>
+                            <p class="lead">Model çilekleri tespit etmek için çalışıyor...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Model Seçim Modali -->
+    <div class="modal fade" id="modelSelectModal" tabindex="-1" aria-labelledby="modelSelectModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Model Seç</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="modalForm" action="/" method="post">
+                        <input type="hidden" id="modalImage" name="file">
+                        <div class="form-group">
+                            <label for="modalModel" class="form-label">Model Seçin</label>
+                            <select id="modalModel" name="model" class="form-select">
+                                <option value="n-bestmodel">N En İyi Model</option>
+                                <option value="s-bestmodel">S En İyi Model</option>
+                                <option value="m-bestmodel">M En İyi Model</option>
+                                <option value="l-bestmodel">L En İyi Model</option>
+                                <option value="x-bestmodel">X Large En İyi Model</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mt-3">Bu Resmi Test Et</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.8/umd/popper.min.js" integrity="sha512-TPh2Oxlg1zp+kz3nFA0C5vVC6leG/6mm1z9+mA81MI5eaUVqasPLO8Cuk4gMF4gUfP5etR73rgU/8PNMsSesoQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script>
+        // Resim tıklamasını ele alıp modalı açma
+        document.querySelectorAll('.carousel-item img').forEach(item => {
+            item.addEventListener('click', function() {
+                const image = this.getAttribute('data-image');
+                document.getElementById('modalImage').value = image;
+            });
+        });
+
+        // Modalda form gönderimini ele alma
+        document.getElementById('modalForm').addEventListener('submit', function() {
+            document.getElementById('loadingSpinner').style.display = 'block';
+        });
+    </script>
+</body>
+
+{% include 'partials/footer.html' %}
+
+</html>

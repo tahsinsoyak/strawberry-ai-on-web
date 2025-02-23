@@ -1,0 +1,112 @@
+[
+    {
+        "filename": "D\u00fclmen,_Kirchspiel,_Erdbeerfeld_--_2015_--_6509.jpg",
+        "model": "m-bestmodel",
+        "image_path": "uploads/e23d4d36/D\u00fclmen,_Kirchspiel,_Erdbeerfeld_--_2015_--_6509.jpg",
+        "bounding_boxes_img_path": "uploads/e23d4d36/bounding_boxes.jpg",
+        "middle_points_img_path": "uploads/e23d4d36/middle_points.jpg",
+        "halfripe_strawberries_count": 0,
+        "ripe_strawberries_count": 3,
+        "unripe_strawberries_count": 1,
+        "date": "2024-09-05 13:40:10"
+    },
+    {
+        "filename": "D\u00fclmen,_Kirchspiel,_Erdbeerfeld_--_2015_--_6509.jpg",
+        "model": "n-bestmodel",
+        "image_path": "uploads/79ff4e16/D\u00fclmen,_Kirchspiel,_Erdbeerfeld_--_2015_--_6509.jpg",
+        "bounding_boxes_img_path": "uploads/79ff4e16/bounding_boxes.jpg",
+        "middle_points_img_path": "uploads/79ff4e16/middle_points.jpg",
+        "halfripe_strawberries_count": 1,
+        "ripe_strawberries_count": 3,
+        "unripe_strawberries_count": 3,
+        "date": "2024-09-05 13:40:35"
+    },
+    {
+        "filename": "D\u00fclmen,_Kirchspiel,_Erdbeerfeld_--_2015_--_6509.jpg",
+        "model": "m-bestmodel",
+        "image_path": "uploads/37d2121f/D\u00fclmen,_Kirchspiel,_Erdbeerfeld_--_2015_--_6509.jpg",
+        "bounding_boxes_img_path": "uploads/37d2121f/bounding_boxes.jpg",
+        "middle_points_img_path": "uploads/37d2121f/middle_points.jpg",
+        "halfripe_strawberries_count": 0,
+        "ripe_strawberries_count": 3,
+        "unripe_strawberries_count": 1,
+        "date": "2024-09-05 13:41:16"
+    },
+    {
+        "filename": "D\u00fclmen,_Kirchspiel,_Erdbeerfeld_--_2015_--_6509.jpg",
+        "model": "l-bestmodel",
+        "image_path": "uploads/a47cc77f/D\u00fclmen,_Kirchspiel,_Erdbeerfeld_--_2015_--_6509.jpg",
+        "bounding_boxes_img_path": "uploads/a47cc77f/bounding_boxes.jpg",
+        "middle_points_img_path": "uploads/a47cc77f/middle_points.jpg",
+        "halfripe_strawberries_count": 0,
+        "ripe_strawberries_count": 3,
+        "unripe_strawberries_count": 2,
+        "date": "2024-09-05 13:41:32"
+    },
+    {
+        "filename": "cilek-hangi-mevsimde-yetisir-shutter-2.jpg",
+        "model": "s-bestmodel",
+        "image_path": "uploads/0df63147/cilek-hangi-mevsimde-yetisir-shutter-2.jpg",
+        "bounding_boxes_img_path": "uploads/0df63147/bounding_boxes.jpg",
+        "middle_points_img_path": "uploads/0df63147/middle_points.jpg",
+        "halfripe_strawberries_count": 0,
+        "ripe_strawberries_count": 1,
+        "unripe_strawberries_count": 0,
+        "date": "2024-09-05 13:45:53"
+    },
+    {
+        "filename": "D\u00fclmen,_Kirchspiel,_Erdbeerfeld_--_2015_--_6509.jpg",
+        "model": "s-bestmodel",
+        "image_path": "uploads/1062457c/D\u00fclmen,_Kirchspiel,_Erdbeerfeld_--_2015_--_6509.jpg",
+        "bounding_boxes_img_path": "uploads/1062457c/bounding_boxes.jpg",
+        "middle_points_img_path": "uploads/1062457c/middle_points.jpg",
+        "halfripe_strawberries_count": 0,
+        "ripe_strawberries_count": 3,
+        "unripe_strawberries_count": 3,
+        "date": "2024-09-05 13:46:13"
+    },
+    {
+        "filename": "10.jpg",
+        "model": "s-bestmodel",
+        "image_path": "testdata/10.jpg",
+        "bounding_boxes_img_path": "uploads/0969311a/bounding_boxes.jpg",
+        "middle_points_img_path": "uploads/0969311a/middle_points.jpg",
+        "halfripe_strawberries_count": 0,
+        "ripe_strawberries_count": 1,
+        "unripe_strawberries_count": 0,
+        "date": "2024-10-16 20:36:19"
+    },
+    {
+        "filename": "1.jpg",
+        "model": "n-bestmodel",
+        "image_path": "testdata/1.jpg",
+        "bounding_boxes_img_path": "uploads/18b8f009/bounding_boxes.jpg",
+        "middle_points_img_path": "uploads/18b8f009/middle_points.jpg",
+        "halfripe_strawberries_count": 1,
+        "ripe_strawberries_count": 0,
+        "unripe_strawberries_count": 4,
+        "date": "2024-10-16 20:36:39"
+    },
+    {
+        "filename": "1.jpg",
+        "model": "n-bestmodel",
+        "image_path": "testdata/1.jpg",
+        "bounding_boxes_img_path": "uploads/5b04e361/bounding_boxes.jpg",
+        "middle_points_img_path": "uploads/5b04e361/middle_points.jpg",
+        "halfripe_strawberries_count": 1,
+        "ripe_strawberries_count": 0,
+        "unripe_strawberries_count": 4,
+        "date": "2024-10-16 21:28:07"
+    },
+    {
+        "filename": "1.jpg",
+        "model": "s-bestmodel",
+        "image_path": "testdata/1.jpg",
+        "bounding_boxes_img_path": "uploads/5fd58b79/bounding_boxes.jpg",
+        "middle_points_img_path": "uploads/5fd58b79/middle_points.jpg",
+        "halfripe_strawberries_count": 1,
+        "ripe_strawberries_count": 0,
+        "unripe_strawberries_count": 4,
+        "date": "2025-02-24 00:58:21"
+    }
+]
